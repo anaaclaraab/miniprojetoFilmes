@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Javascript</title>
+    <meta caarset=" UTF-8" />
+  </head>
+  <body>
+    <script>
+      const catalogoFilmes = [];
+
+      function adicionarFilmes() {
+        const nome = prompt("Insira o nome do filme:");
+        const preco = prompt("Agora nos diga o preço :");
+        const descricao = prompt("E a descrição:");
+
+        const novoFilme = {
+          nome: nome,
+          preco: preco,
+          descricao: descricao,
+        };
+
+        catalogoFilmes.push(novoFilme);
+        alert("Que legal,seu filme foi adicionado ao nosso catálogo!");
+      }
+
+      function buscarFilmes() {
+        const nomeBusca = prompt("Insira o nome do filme que deseja buscar:");
+
+        const filmeEncontrado = catalogoFilmes.find(
+          (produto) => produto.nome === nomeBusca
+        );
+
+        if (filmeEncontrado) {
+          alert(
+            `Nome: ${filmeEncontrado.nome}\nPreço: ${filmeEncontrado.preco}\nDescrição: ${filmeEncontrado.descricao}`
+          );
+        } else {
+          alert(
+            "Ahh, não encontramos esse filme no catálogo. Por favor, tente novamente!"
+          );
+        }
+      }
+
+      function atualizarFilmes() {
+        const nomeAtualizar = prompt(
+          "Insira o nome do filme que deseja atualizar:"
+        );
+
+        const filmeAtualizar = catalogoFilmes.find(
+          (produto) => produto.nome === nomeAtualizar
+        );
+
+        if (filmeAtualizar) {
+          const novoNome = prompt("De um novo nome ao seu filme");
+          alert("Agora seu filme está de cara nova!!");
+          const novoPreco = prompt("Qual o novo preço do filme que escolheu?");
+          const novaDescricao = prompt("Nos diga a nova descrição:");
+
+          filmeAtualizar.descricao = novaDescricao;
+          filmeAtualizar.nome = novoNome;
+          filmeAtualizar.preco = novoPreco;
+
+          alert("Perfeito, seu filme foi atualizado com sucesso!");
+        } else {
+          alert("Filme não encontrado no momento, tente mais uma vez.");
+        }
+      }
+
+      function visualizarFilmes() {
+        let listaFilmes = "Filmes no Catálogo:\n";
+
+        catalogoFilmes.forEach((produto) => {
+          listaFilmes += `Nome: ${produto.nome} | Preço: ${produto.preco} | Descrição: ${produto.descricao}\n`;
+        });
+
+        alert(listaFilmes);
+      }
+
+      function removerFilmes() {
+        const nomeRemover = prompt(
+          "Insira o nome do filme que deseja remover:"
+        );
+
+        const indexRemover = catalogoFilmes.findIndex(
+          (produto) => produto.nome === nomeRemover
+        );
+
+        if (indexRemover !== -1) {
+          catalogoFilmes.splice(indexRemover, 1);
+          alert("Filme removido.");
+        } else {
+          alert("Filme não encontrado no catálogo.");
+        }
+      }
+
+      let opcao;
+      do {
+        opcao = prompt(
+          "Escolha uma opção:\n1 - Vamos adicionar um filme! \n2 -Que filme voce quer assistir? \n3 - Atualizar Filmes \n4 - Visualizar Todos os filmes do catálogo \n5 - Remover\n6 - Sair"
+        );
+
+        switch (opcao) {
+          case "1":
+            adicionarFilmes();
+            break;
+          case "2":
+            buscarFilmes();
+            break;
+          case "3":
+            atualizarFilmes();
+            break;
+          case "4":
+            visualizarFilmes();
+            break;
+          case "5":
+            removerFilmes();
+            break;
+          case "6":
+            alert("Saindo do programa...");
+            break;
+          default:
+            alert("Opção inválida. Por favor, escolha outra opção.");
+            break;
+        }
+      } while (opcao !== "6");
+    </script>
+  </body>
+</html>
